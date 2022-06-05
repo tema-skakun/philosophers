@@ -6,7 +6,7 @@
 /*   By: fdarkhaw <fdarkhaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 23:48:42 by ulagrezina        #+#    #+#             */
-/*   Updated: 2022/06/05 23:07:59 by fdarkhaw         ###   ########.fr       */
+/*   Updated: 2022/06/05 23:28:29 by fdarkhaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;	
 	validation_and_parcing(argc, argv, &philo);
+	pthread_mutex_init(&philo.left, 0);//инициализация mutex по умолчанию
+	pthread_mutex_init(&philo.right, 0);//инициализация mutex по умолчанию
+	while (philo.num_of_philo)
+	{
+		pthread_create(id, 0, philosophers, &philo);
+		philo.num_of_philo--;
+	}
 	data.p_mutex = &mutex;//будет защищать от гонки данных
 	data.num = &tmp;
 	printf("philo\t- %d %d %d %d\n", philo.num_of_philo, philo.time_to_die, philo.time_to_eat, philo.time_to_sleep);

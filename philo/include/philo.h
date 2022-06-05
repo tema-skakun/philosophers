@@ -6,7 +6,7 @@
 /*   By: fdarkhaw <fdarkhaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 23:57:29 by ulagrezina        #+#    #+#             */
-/*   Updated: 2022/06/05 22:33:08 by fdarkhaw         ###   ########.fr       */
+/*   Updated: 2022/06/05 23:20:57 by fdarkhaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,18 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int		num_of_philo;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		num_of_times;
-	t_mutex	*left;
-	t_mutex	*right;
+	int				num_of_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				num_of_times;
+	struct timeval	time_last_eat;
+	int				dead;
+	t_mutex			*left;
+	t_mutex			*right;
 }	t_philo;
 
 void	validation_and_parcing(int ac, char **av, t_philo *philo);
+void	philosophers(void *philo);
 
 #endif
