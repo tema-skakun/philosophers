@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdarkhaw <fdarkhaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jg <jg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 12:17:47 by fdarkhaw          #+#    #+#             */
-/*   Updated: 2022/06/11 20:33:23 by fdarkhaw         ###   ########.fr       */
+/*   Updated: 2022/06/12 12:45:41 by jg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ int	init_philosophers(t_data *data)
 
 	i = 0;
 	if (gettimeofday(&data->start, NULL) != 0)
-		return (1);
-	while (i < data->number_of_philo)
+		return (ft_error("the gettimeofday worked incorrectly"));
+	while (i < data->number_of_philo)//пока i < кол-ва философов
 	{
 		data->philo[i].right_fork = i;
-		data->philo[i].left_fork = (i + 1) % data->number_of_philo;
-		// printf("%d\n", data->philo[i].left_fork);
+		data->philo[i].left_fork = (i + 1) % data->number_of_philo;//операция % возвращает остаток (не дробный хвост)
 		data->philo[i].index = i;
 		data->philo[i].data = data;
 		data->philo[i].last_eat = data->start;
@@ -43,7 +42,7 @@ int	init_forks(t_data *data)
 		return (ft_error("Mutex error"));
 	if (pthread_mutex_init(&(data->print_lock), NULL) != 0)
 		return (ft_error("Mutex error"));
-	while (i < data->number_of_philo)
+	while (i < data->number_of_philo)//вилок столько же сколько и философов
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
 			return (ft_error("Mutex error"));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdarkhaw <fdarkhaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jg <jg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 23:48:42 by fdarkhaw          #+#    #+#             */
-/*   Updated: 2022/06/11 13:51:29 by fdarkhaw         ###   ########.fr       */
+/*   Updated: 2022/06/12 12:47:18 by jg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	start_game(t_data *data)
 	i = 0;
 	while (i < data->number_of_philo)
 	{
-		if (pthread_create(&(data->philo[i].id), NULL, simulation,
+		if (pthread_create(&(data->philo[i].id), NULL, simulation, \
 				(void *)&(data->philo[i])))
 			return (ft_error("Create error"));
-		if (pthread_detach(data->philo[i].id) != 0)
+		if (pthread_detach(data->philo[i].id))
 			return (ft_error("Detach error"));
 		i++;
 	}
@@ -43,9 +43,9 @@ int	main(int ac, char **av)
 		return (ft_error("Wrong number of arguments"));
 	if (validation(&data, av))//ok
 		return (1);
-	if (init_philosophers(&data) || init_forks(&data))
+	if (init_philosophers(&data) || init_forks(&data))//ок
 		return (1);
-	if (start_game(&data))
+	if (start_game(&data))//разобраться с breaker
 		return (1);
 	finish_game(&data);
 	return (0);

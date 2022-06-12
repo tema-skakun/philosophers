@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdarkhaw <fdarkhaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jg <jg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 11:42:06 by fdarkhaw          #+#    #+#             */
-/*   Updated: 2022/06/11 13:24:25 by fdarkhaw         ###   ########.fr       */
+/*   Updated: 2022/06/12 11:41:53 by jg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 
 typedef struct timeval	t_timeval;
+typedef pthread_mutex_t	t_mutex;
 
 typedef struct s_philo
 {
@@ -35,17 +36,17 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	int				number_of_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				number_of_times;
-	int				counter_times_eaten;
-	t_timeval		start;
-	pthread_mutex_t	forks[200];
-	pthread_mutex_t	breaker;
-	pthread_mutex_t	print_lock;
-	t_philo			philo[200];
+	int			number_of_philo;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			number_of_times;
+	int			counter_times_eaten;
+	t_timeval	start;
+	t_mutex		forks[200];
+	t_mutex		breaker;
+	t_mutex		print_lock;
+	t_philo		philo[200];
 }	t_data;
 
 int				validation(t_data *data, char **av);
